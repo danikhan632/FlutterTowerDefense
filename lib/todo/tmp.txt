@@ -1,0 +1,82 @@
+import 'package:flame/components.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flame/game.dart';
+import 'package:flame/flame.dart';
+import 'package:flame/sprite.dart';
+import 'dart:ui';
+import 'package:flutter/material.dart';
+import 'package:path_provider/path_provider.dart';
+
+import 'package:tower_defense/game/Tower.dart';
+import 'package:tower_defense/game/Enemy.dart';
+import 'package:tower_defense/game/Projectile.dart';
+import 'package:tower_defense/game/SideMenu.dart';
+
+class Tower {
+  // gun turret in a 2d tower defense game
+  int x_pos = 0;
+  int y_pos = 0;
+  int width = 0;
+  int height = 0;
+  int damage = 0;
+  double range = 0;
+  double fire_rate = 0;
+  double direction = 0;
+  int cost = 0;
+  //upgrades?
+  String sprite_bottom = "";
+  String sprite_top = "";
+  String sprite_muzzle_flash = "";
+  String gunfire_audio = "";
+  
+
+  Tower(this.x_pos,
+        this.y_pos,
+        this.width, 
+        this.height, 
+        this.damage, 
+        this.range, 
+        this.fire_rate, 
+        this.direction, 
+        this.cost, 
+        this.sprite_bottom, 
+        this.sprite_top, 
+        this.sprite_muzzle_flash, 
+        this.gunfire_audio
+        );
+  int getCost() {return cost;}
+  int getDamage() {return damage;}
+  double getRange() {return range;}
+  double getFireRate() {return fire_rate;}
+  double getDirection() {return direction;}
+  int getX() {return x_pos;}
+  int getY() {return y_pos;}
+  int getWidth() {return width;}
+  int getHeight() {return height;}
+  String getSpriteBottom() {return sprite_bottom;}
+  String getSpriteTop() {return sprite_top;}
+  String getSpriteMuzzleFlash() {return sprite_muzzle_flash;}
+  String getGunfireAudio() {return gunfire_audio;}
+  void setX(int x) {x_pos = x;}
+  void setY(int y) {y_pos = y;}
+  void setDirection(double d) {direction = d;}
+  void setRange(double r) {range = r;}
+  void setFireRate(double f) {fire_rate = f;}
+  void setDamage(int d) {damage = d;}
+  void setCost(int c) {cost = c;}
+  void setSpriteBottom(String s) {sprite_bottom = s;}
+  void setSpriteTop(String s) {sprite_top = s;}
+  void setSpriteMuzzleFlash(String s) {sprite_muzzle_flash = s;}
+  void setGunfireAudio(String s) {gunfire_audio = s;}
+
+Enemy getFirstEnemy() {
+  for (Enemy e in Enemy.enemies) {
+    if (e.getX() < x_pos + width && e.getX() > x_pos - width && e.getY() < y_pos + height && e.getY() > y_pos - height) {
+      return e;
+    }
+  }
+  return null;
+}
+
+}
